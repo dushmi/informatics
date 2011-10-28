@@ -22,7 +22,7 @@ void read() {
 
 //sieve[i] = 1 if i is prime or 0 otherwise
 //nbf[i] = number of different prime factors of i
-//fsq[i] = 1 if i is free of cubes or 0 otherwise
+//fsq[i] = 1 if i is free of squares or 0 otherwise
 void sieve_of_eratosthenes() {
   for (int i = 2; i <= mv; ++i)
     fsq[i] = 1;
