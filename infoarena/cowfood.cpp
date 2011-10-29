@@ -21,7 +21,7 @@ void read() {
 //din[i][j] = din[i][j - 1] + din[i - 1][j]
 void init() {
   for (int j = 0; j <= s; ++j)
-    din[j] = 1;
+    din[j] = din[j - 1] + 1;
 
   for (int  i = 2; i <= k; ++i)
     for (int j = 1; j <= s; ++j)
@@ -32,9 +32,9 @@ void back(int poz, int v[K]) {
   if (poz == n + 1) {
     if (s >= sum) {
       if (nb1 & 1) 
-        result = (result + din[s - sum]) % MOD; 
-      else if (nb1)
-        result = (result - din[s - sum] + MOD) % MOD;
+        result = (result - din[s - sum] + MOD) % MOD; 
+      else
+        result = (result + din[s - sum]) % MOD;
     }
 
     return;
@@ -81,7 +81,7 @@ int main() {
   
   back(1, v);
 
-  printf("%d\n", result);
+  printf("%d\n", result - k * s - 1);
 
   return 0;
 }
