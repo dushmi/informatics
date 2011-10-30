@@ -2,7 +2,7 @@
 
 const int K = 35, N = 25, S = 10005, MOD = 3210121;
 
-int result, k, s, n, nb1, sum, missed[K][N], din[S];
+int result, k, s, n, nb1, sum, missed[N][K], din[S];
 
 inline int max(int x, int y) {
   return x < y ? y : x;
@@ -81,7 +81,7 @@ int main() {
   
   back(1, v);
 
-  printf("%d\n", result - k * s - 1);
+  printf("%d\n", (result - k * s - 1 + MOD) % MOD);
 
   return 0;
 }
