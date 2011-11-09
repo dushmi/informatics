@@ -1,0 +1,73 @@
+#include <iostream>
+
+using namespace std;
+
+long long t1, t2, x1, x2, t0;
+
+void read() {
+  cin >> t1 >> t2 >> x1 >> x2 >> t0;
+}
+
+void solve() {
+  if (t0 == t2 && t0 == t1) {
+    cout << x1 << " " << x2;
+    return;
+  }
+
+  if (t0 == t2) {
+    cout << "0 " << x2;
+    return;
+  }
+
+  long long lastd = 0, lastu = 0;
+
+  long long soly1 = 0, soly2 = 0;
+  
+  for (int y1 = 0; y1 <= x1; ++y1) {
+    long long y2 = y1 * (t0 - t1) / (t2 - t0) - 1;
+    
+    if (t1 * y1 + t2 * y2 >= t0 * (y1 + y2) && y2 <= x2 && y2 >= 0){
+      if ((t1 * y1 + t2 * y2) * lastd < (y1 + y2) * lastu) {
+        lastu = t1 * y1 + t2 * y2;
+        lastd = y1 + y2;
+        soly1 = y1;
+        soly2 = y2;
+      } else if ((t1 * y1 + t2 * y2) * lastd == (y1 + y2) * lastu) {
+        if (y1 + y2 > soly1 + soly2) {
+          lastu = t1 * y1 + t2 * y2;
+          lastd = y1 + y2;
+          soly1 = y1;
+          soly2 = y2;
+        }
+      }
+    }
+
+    ++y2;
+
+    if (t1 * y1 + t2 * y2 >= t0 * (y1 + y2) && y2 <= x2 && y2 >= 0){
+      if ((t1 * y1 + t2 * y2) * lastd < (y1 + y2) * lastu) {
+        lastu = t1 * y1 + t2 * y2;
+        lastd = y1 + y2;
+        soly1 = y1;
+        soly2 = y2;
+      } else if ((t1 * y1 + t2 * y2) * lastd == (y1 + y2) * lastu) {
+        if (y1 + y2 > soly1 + soly2) {
+          lastu = t1 * y1 + t2 * y2;
+          lastd = y1 + y2;
+          soly1 = y1;
+          soly2 = y2;
+        }
+      }
+    }
+  }
+
+  cout << soly1 << " " << soly2;
+}
+
+int main() {
+  read();
+
+  solve();
+
+  return 0;
+}
