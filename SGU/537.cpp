@@ -1,7 +1,5 @@
 #include <iostream>
 #include <cstring>
-#include <algorithm>
-#include <vector>
 
 using namespace std;
 
@@ -24,20 +22,15 @@ long long gcd(long long x, long long y) {
 }
 
 void afis(long long x) {
-  vector <long long> v;
+  long long i;
   
-  for (long long i = 1; i * i <= x; ++i)
-    if (x % i == 0) {
-      v.push_back(i);
+  for (i = 1; i * i <= x; ++i)
+    if (x % i == 0) 
+      cout << " " << i;
 
-      if (i != x / i)
-        v.push_back(x / i);
-    }
-  
-  sort(v.begin(), v.end());
-
-  for (int i = 0; i < (int)v.size(); ++i)
-    cout << " " << v[i];
+  for (i = i - 1; i >= 1; --i)
+    if (x % i == 0 && i != x / i)
+      cout << " " << x / i;
 
   cout << "\n";
 }
@@ -74,8 +67,6 @@ void solve() {
     
     return;
   }
-
-  sort(s, s + n + 1);
 
   if (n == 9) {
     cout << " 1 3 9\n";
