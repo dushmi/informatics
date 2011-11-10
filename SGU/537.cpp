@@ -50,7 +50,7 @@ void solve() {
   long long pas = 0, rez = 0;
   
   for (int i = 0; i < 26; ++i)
-    f[i] = 0;
+    f[i] = 0, fr[i] = 0;
 
   for (i = n, pas = 1; i >= 0; --i, pas *= 10) {
     if (!f[s[i] - 'a'])
