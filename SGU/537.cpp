@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <iostream>
 #include <cstring>
 #include <algorithm>
 #include <vector>
@@ -37,9 +37,9 @@ void afis(long long x) {
   sort(v.begin(), v.end());
 
   for (int i = 0; i < (int)v.size(); ++i)
-    printf(" %lld", v[i]);
+    cout << " " << v[i];
 
-  printf("\n");
+  cout << "\n";
 }
 
 void solve() {
@@ -78,7 +78,7 @@ void solve() {
   sort(s, s + n + 1);
 
   if (n == 9) {
-    printf(" 1 3 9\n");
+    cout << " 1 3 9\n";
 
     return;
   }
@@ -86,24 +86,24 @@ void solve() {
   if (n == 12) {
     for (int i = 0; i < 26; ++i)
       if (fr[i] == 4) {
-        printf(" 1 3\n");
+        cout << " 1 3\n";
         
         return;
       }
   }
 
-  printf(" 1\n");
+  cout << " 1\n";
 }
 
 int main() {
   int T;
 
-  scanf("%d\n", &T);
+  cin >> T;
 
   for (int i = 1; i <= T; ++i) {
-    gets(s);
+    cin >> s;
 
-    printf("Case %d:", i);
+    cout << "Case " << i << ":";
 
     solve();
   }
