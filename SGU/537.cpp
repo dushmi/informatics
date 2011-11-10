@@ -7,7 +7,7 @@ using namespace std;
 
 char s[30];
 
-int n;
+int n, fr[30];
 
 long long f[30];
 
@@ -37,7 +37,7 @@ void afis(long long x) {
   sort(v.begin(), v.end());
 
   for (int i = 0; i < (int)v.size(); ++i)
-    printf("%lld ", v[i]);
+    printf(" %lld", v[i]);
 
   printf("\n");
 }
@@ -56,6 +56,8 @@ void solve() {
     if (!f[s[i] - 'a'])
       ++nrd;
   
+    ++fr[s[i] - 'a'];
+
     f[s[i] - 'a'] += pas;
   }
 
@@ -76,18 +78,21 @@ void solve() {
   sort(s, s + n + 1);
 
   if (n == 9) {
-    printf("1 3 9\n");
+    printf(" 1 3 9\n");
 
     return;
   }
 
-  if (n == 12 && s[0] == s[1] && s[0] == s[2] && s[0] == s[3]) {
-    printf("1 3\n");
-    
-    return;
+  if (n == 12) {
+    for (int i = 0; i < 26; ++i)
+      if (fr[i] == 4) {
+        printf(" 1 3\n");
+        
+        return;
+      }
   }
 
-  printf("1\n");
+  printf(" 1\n");
 }
 
 int main() {
@@ -98,7 +103,7 @@ int main() {
   for (int i = 1; i <= T; ++i) {
     gets(s);
 
-    printf("Case %d: ", i);
+    printf("Case %d:", i);
 
     solve();
   }
