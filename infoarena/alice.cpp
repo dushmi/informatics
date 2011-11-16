@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cmath>
 
 const int N = 35;
 
@@ -28,7 +29,7 @@ int main() {
 
   solve();
 
-  printf("%lld", (long long)((double)d[n][r] * x));
+  printf("%0.0lf", floor(d[n][r] * x));
 
   return 0;
 }
