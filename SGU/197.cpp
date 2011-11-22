@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstring>
+#include <cstdlib>
 
 typedef int Huge[105];
 
@@ -14,7 +15,7 @@ void read() {
   
   n[0] = strlen(a + 1);
   for (int i = 1; i <= n[0]; ++i)
-    n[i] = a[i] - '0';
+    n[i] = a[n[0] - i + 1] - '0';
 
   scanf("%d%d", &m, &p);
 }
