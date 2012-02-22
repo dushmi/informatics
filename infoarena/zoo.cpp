@@ -8,7 +8,7 @@ using namespace std;
 const int N = 16500, M = 100500, INF = 2000000500;
 
 struct point {
-  int x, y;
+  int x, y, poz, sgn;
 };
 
 struct rectangle {
@@ -19,7 +19,7 @@ rectangle q[M];
 
 point v[N], t[4 * M];
 
-int n, m, newm, ans[4 * M], vy[N], cory[N], aib[N];
+int n, m, newm, ans[M], vy[N], cory[N], aib[N];
 
 void read() {
   char s[100];
@@ -190,18 +190,26 @@ void init() {
     ++newm;
     t[newm].x = q[i].x2;
     t[newm].y = q[i].y2;
+    t[newm].poz = i;
+    t[newm].sgn = 1;
 
     ++newm;
     t[newm].x = q[i].x2;
     t[newm].y = q[i].y1;
+    t[newm].poz = i;
+    t[newm].sgn = -1;
 
     ++newm;
     t[newm].x = q[i].x1 - 1;
     t[newm].y = q[i].y2;
+    t[newm].poz = i;
+    t[newm].sgn = -1;
 
     ++newm;
     t[newm].x = q[i].x1 - 1;
     t[newm].y = q[i].y1;
+    t[newm].poz = i;
+    t[newm].sgn = 1;    
   }
 
   sort(t + 1, t + newm + 1, comp);
@@ -229,20 +237,10 @@ inline void insert(int poz) {
   }
 }
 
-int cb(int x, int y) {
-  int pas = 1 << 18, i = 0;
-
-  for (i = 0; pas; pas >>= 1)
-    if (i + pas <= newm && (t[i + pas].x < x || (t[i + pas].x == x && t[i + pas].y < y)))
-      i += pas;
-
-  return i + 1;
-}
-
 void solve() {
   for (int i = 1, j = 1; i <= n || j <= newm;)
     if (i > n) {
-      ans[j] = query(t[j].y);
+      ans[t[j].poz] += t[j].sgn * query(t[j].y);
       ++j;
     } else if (j > newm) {
       insert(v[i].y);
@@ -251,12 +249,12 @@ void solve() {
       insert(v[i].y);
       ++i;
     } else {
-      ans[j] = query(t[j].y);
+      ans[t[j].poz] += t[j].sgn * query(t[j].y);
       ++j;
     }
 
   for (int i = 1; i <= m; ++i)
-      printf("%d\n", ans[cb(q[i].x2, q[i].y2)] - ans[cb(q[i].x2, q[i].y1)] - ans[cb(q[i].x1 - 1, q[i].y2)] + ans[cb(q[i].x1 - 1, q[i].y1)]);
+      printf("%d\n", ans[i]);
 }
 
 int main() {
