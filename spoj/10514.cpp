@@ -7,15 +7,19 @@ struct building {
   int height, tax;
 
   bool operator<(const building &other) const {
-    return height < other.height;
+    return (height < other.height);
   }
 };
 
-const int N = 10005, INF = 0x3f3f3f3f;
+const int N = 10005;
+
+const long long INF = 1LL * N * N * N;
 
 building towers[N];
 
-int n, sum[N][2], S[N];
+int n;
+
+long long sum[N][2], S[N];
 
 void read() {
   scanf("%d", &n);
@@ -33,19 +37,19 @@ void init() {
   sort(towers + 1, towers + n + 1);
 
   for (int i = 1; i <= n; ++i) {
-    S[i] = S[i - 1] + towers[i].tax;
-    sum[i][0] = sum[i - 1][0] + towers[i].height * towers[i].tax;
-    sum[i][1] = sum[i - 1][1] + (towers[n].height - towers[i].height) * towers[i].tax;
+    S[i] = S[i - 1] + 1LL * towers[i].tax;
+    sum[i][0] = sum[i - 1][0] + 1LL * towers[i].height * towers[i].tax;
+    sum[i][1] = sum[i - 1][1] + 1LL * (towers[n].height - towers[i].height) * towers[i].tax;
   }
 }
 
 void solve() {
-  int ans = INF;
+  long long ans = INF;
 
   for (int i = 1; i <= n; ++i)
-    ans = min(ans, sum[i - 1][1] + (towers[n].height - towers[i].height) * S[i - 1] + sum[n][0] - sum[i][0] + towers[i].height * (S[n] - S[i]));
+    ans = min(ans, sum[i - 1][1] - 1LL * (towers[n].height - towers[i].height) * S[i - 1] + (sum[n][0] - sum[i][0]) - 1LL * towers[i].height * (S[n] - S[i]));
 
-  printf("%d\n", ans);
+  printf("%lld\n", ans);
 }
 
 int main() {
