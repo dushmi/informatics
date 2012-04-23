@@ -9,14 +9,10 @@ int dr, n, stack[N], a[N], f[N], pos[N], s[N], sz[N];
 
 vector <int> elim[N];
 
-inline bool is_int(char ch) {
-  return (ch >= '0' && ch <= '9');
-}
-
 inline int number(char ch[15]) {
   int x = 0, pos = 0; 
   
-  while (is_int(ch[pos]))
+  while (ch[pos] >= '0' && ch[pos] <= '9')
     x =  x * 10 + ch[pos++] - '0';
   
   return x;
@@ -64,10 +60,10 @@ void solve() {
       s[i] = elim[ind][pos[ind]];
     else
       s[i] = f[ind];
-
-    if (i >= 2)
-      res += 1LL * (i - f[i]) * (n - i + f[i] - 1) + 1LL * (i - f[i] - 1) * (i - f[i] - 1) + (i - s[i] - 1);
   }
+  
+  for (int i = 2; i <= n; ++i)
+    res += 1LL * (i - f[i]) * (n - i + f[i] - 1) + 1LL * (i - f[i] - 1) * (i - f[i] - 1) + (i - s[i] - 1);
 
   printf("%lld\n", res);
 }
