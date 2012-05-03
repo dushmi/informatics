@@ -52,7 +52,13 @@ bool squareIntersection(vector <Square> v) {
     x2 = min(x2, v[i].x2); y2 = min(y2, v[i].y2);
   }
 
-  if (x1 < x2 && y1 < y2)
+  if (x1 == x2 && y1 == y2 && (x1 & 1) == (y1 & 1))
+    return 1;
+  
+  if (x1 == x2 && y1 == y2)
+    return 0;
+  
+  if (x1 <= x2 && y1 <= y2)
     return 1;
 
   return 0;
