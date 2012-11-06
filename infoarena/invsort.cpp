@@ -52,9 +52,11 @@ void quickSort(int left, int right) {
   sort(aux + left, aux + right + 1);
   int median = aux[middle], m = aux[left], M = aux[right];
   
+  //if all elements from vec[left] to vec[right] are equal => nothing to do
   if (m == median && M == median)
     return;
   
+  //make v01
   int nb0 = 0;
   for (int i = left; i <= right; ++i)
     if (m != median) {
