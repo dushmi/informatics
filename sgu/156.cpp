@@ -105,8 +105,6 @@ bool eulerian_graph_verification() {
 void eulerian_cycle(int node) {
   int w;
 
-  E.push_back(node);
-
   while (!G[node].empty()) {
     w = G[node][(int)G[node].size() - 1];
     
@@ -121,6 +119,8 @@ void eulerian_cycle(int node) {
 
     eulerian_cycle(w);
   }
+
+  E.push_back(node);
 }
 
 // print the solution
@@ -141,7 +141,7 @@ void print() {
   --dim[1];
   printf("%d ", last_node);
 
-  for (int i = 1; i < (int)E.size() - 1; ++ i) {
+  for (int i = 1; i < (int)E.size() - 1; ++i) {
     for (int j = 0; j < (int)L[last_node].size(); ++j)
       if (clique[L[last_node][j]] == E[i]) {
         last_node = L[last_node][j];
