@@ -1,0 +1,3 @@
+gcc -o exe_name source_name.c
+g++ -o exe_name source_name.cpp
+./connect source_1 source_2
